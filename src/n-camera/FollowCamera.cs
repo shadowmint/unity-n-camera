@@ -3,10 +3,10 @@ using N;
 
 namespace N.Package.Camera
 {
+    /// Basic follow camera moves with object, but ignores target rotations
     [AddComponentMenu("N/Camera/FollowCamera")]
     public class FollowCamera : MonoBehaviour
     {
-
         [Tooltip("The GameObject instance on the scene to match positions with (ie. Don't pick a prefab from the Assets list)")]
         public GameObject target;
 
