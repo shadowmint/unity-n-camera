@@ -15,7 +15,7 @@ public class CameraTest : MonoBehaviour
 
     public void Start()
     {
-        state = new CameraState(gameObject, worldNormal);
+        state = new CameraState(gameObject, worldNormal.transform.up);
         rotation = state.lastKnownRotation;
     }
 
@@ -29,11 +29,8 @@ public class CameraTest : MonoBehaviour
 
 public class CameraState
 {
-    /// Global axis
-    public GameObject reference;
-
-    /// Local axis
-    public GameObject local;
+    /// Global up axis
+    public Vector3 up;
 
     /// Current rotation state
     public Quaternion rotation;
@@ -41,10 +38,9 @@ public class CameraState
     /// Last rotation value
     public Vector3 lastKnownRotation;
 
-    public CameraState(GameObject initialState, GameObject reference)
+    public CameraState(GameObject initialState, Vector3 up)
     {
-        local = initialState;
-        this.reference = reference;
+        this.up = up;
         rotation = initialState.transform.rotation;
         lastKnownRotation = rotation.eulerAngles;
     }
@@ -64,7 +60,7 @@ public class CameraState
     public void Rotate(Vector3 change)
     {
         var up = Quaternion.AngleAxis(change.x, Right);
-        var left = Quaternion.AngleAxis(change.y, reference.transform.up);
+        var left = Quaternion.AngleAxis(change.y, this.up);
         var tilt = Quaternion.AngleAxis(change.z, Forward);
         rotation = left * up * tilt * rotation;
     }
