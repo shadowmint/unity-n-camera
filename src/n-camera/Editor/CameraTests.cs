@@ -1,6 +1,6 @@
 #if N_CAMERA_TESTS
 using NUnit.Framework;
-using N.Package.Camera;
+using N.Package.Cameras;
 
 public class CameraTests {
 
